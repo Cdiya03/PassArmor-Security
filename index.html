@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Academic evaluation project. An interactive toolkit designed to analyze password strength, estimate entropy, and simulate brute force timelines." />
+  <title>PassArmor - Cyber Security Toolkit</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#" onclick="navigate('dashboard'); return false;">PASSARMOR</a>
+    <ul class="nav-links">
+      <li><a href="#" data-page="dashboard" class="active">Dashboard</a></li>
+      <li><a href="#" data-page="analyzer">Strength Analyzer</a></li>
+      <li><a href="#" data-page="generator">Password Generator</a></li>
+      <li><a href="#" data-page="about">About Project</a></li>
+    </ul>
+    <div class="nav-badge">
+      <span>Academic Submission</span>
+      <strong>Project:</strong> PassArmor Tool &nbsp;|&nbsp; <strong>Core:</strong> HTML, CSS, JS
+    </div>
+  </div>
+</nav>
+
+<!-- ===== SUB HEADER ===== -->
+<div class="sub-header">
+  <div class="sub-header-inner">
+    <span class="sub-label">Security Evaluation Portal</span>
+    <span class="sub-title" id="sub-page-title">PassArmor Central SOC Console</span>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!--        PAGE: DASHBOARD        -->
+<!-- ============================= -->
+<div class="page active" id="page-dashboard">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero-section">
+      <div class="page-label">Password Security Operations Center</div>
+      <h1 class="page-title">Password Security<br>Operations Center</h1>
+      <p class="page-desc">Analyze password vulnerabilities, simulate brute-force timelines, and generate secure combinations through advanced cryptographic heuristics.</p>
+      <div class="hero-compliance">
+        <span>SYSTEM INTEGRITY</span>
+        <div class="compliance-bar"><div class="compliance-fill"></div></div>
+        <span class="compliance-pct">100% COMPLIANT</span>
+      </div>
+    </div>
+
+    <!-- Quick Scan -->
+    <div class="quick-scan-section">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">⚡ Sandbox Quick Scan</span>
+          <span class="status-badge green"><span class="dot"></span> LIVE</span>
+        </div>
+        <div class="card-body">
+          <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);margin-bottom:1rem;">
+            Perform an instantaneous security audit. Types, sizes, and sequences are analyzed in real-time.
+          </p>
+          <div class="input-wrap" style="margin-bottom:0.75rem;">
+            <span class="input-prefix">▶</span>
+            <input type="password" class="cyber-input" id="quick-scan-input" placeholder="Input candidate credential to fire up scanner." />
+          </div>
+          <div class="strength-bar-wrap">
+            <div class="strength-bar-fill" id="qs-bar"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="input-note" id="qs-label" style="color:var(--text-muted);">Input candidate credential to fire up scanner.</span>
+            <a href="#" onclick="navigate('analyzer');return false;" class="btn btn-cyan" style="font-size:0.6rem;padding:0.3rem 0.75rem;">Advanced Analysis Engine →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+      <!-- Terminal -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📟 Terminal Event Feed</span>
+          <span class="status-badge cyan"><span class="dot"></span> NODE MONITOR: ACTIVE PORT 443</span>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <div class="terminal" id="terminal-feed"></div>
+        </div>
+      </div>
+
+      <!-- Module Nav -->
+      <div style="display:grid;gap:1rem;">
+        <a href="#" onclick="navigate('analyzer');return false;" class="module-link">
+          <div class="module-card">
+            <div class="module-icon">🔍</div>
+            <div class="module-title">Strength Analyzer</div>
+            <p class="module-desc">Detailed assessment including character metrics, repeated sequences, NIST requirement scoring, and Shannon entropy estimation.</p>
+            <div class="module-cta">Launch Analyzer →</div>
+          </div>
+        </a>
+        <a href="#" onclick="navigate('generator');return false;" class="module-link">
+          <div class="module-card">
+            <div class="module-icon">🔐</div>
+            <div class="module-title">Password Generator</div>
+            <p class="module-desc">Create high-entropy random credentials, customize complexity constraints and copy generated suggestions.</p>
+            <div class="module-cta">Generate Keys →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Academic Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">📋 Academic Presentation & Viva Support Module</span>
+        <span class="status-badge green"><span class="dot"></span>READY</span>
+      </div>
+      <div class="card-body" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+        <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-secondary);max-width:500px;">
+          Access the design methodology, project objectives, and structural flowchart diagrams directly.
+        </p>
+        <a href="#" onclick="navigate('about');return false;" class="btn btn-blue">View System Architecture →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================= -->
+<!--        PAGE: ANALYZER         -->
+<!-- ============================= -->
+<div class="page" id="page-analyzer">
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-label">Vulnerability Core</div>
+      <h1 class="page-title">Password Strength &amp; Entropy Analyzer</h1>
+      <p class="page-desc">Compute mathematical entropy parameters and search-space complexity limits to analyze real-time cracking vulnerability.</p>
+    </div>
+
+    <!-- Input -->
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="card-header">
+        <span class="card-title">🔌 Credential Intake Port</span>
+        <span id="threat-badge" class="status-badge red">Vulnerability Threat Score: <span id="threat-pct">0%</span></span>
+      </div>
+      <div class="card-body">
+        <div class="input-wrap" style="margin-bottom:1rem;">
+          <span class="input-prefix">▶</span>
+          <input type="password" class="cyber-input" id="analyzer-input" placeholder="Enter password to analyze entropy and crack resistance..." />
+        </div>
+        <div class="strength-bar-wrap">
+          <div class="strength-bar-fill" id="threat-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+
+      <!-- NIST Checks -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📋 Standard NIST Verification Parameters</span>
+        </div>
+        <div class="card-body">
+          <div class="nist-grid">
+            <div class="nist-item fail" id="nist-length">
+              <span class="nist-icon">✗</span>
+              Length (min 12 characters)
+            </div>
+            <div class="nist-item fail" id="nist-upper">
+              <span class="nist-icon">✗</span>
+              Contains Uppercase (A-Z)
+            </div>
+            <div class="nist-item fail" id="nist-lower">
+              <span class="nist-icon">✗</span>
+              Contains Lowercase (a-z)
+            </div>
+            <div class="nist-item fail" id="nist-numbers">
+              <span class="nist-icon">✗</span>
+              Contains Numbers (0-9)
+            </div>
+            <div class="nist-item fail" id="nist-symbols">
+              <span class="nist-icon">✗</span>
+              Contains Symbols (e.g. @, #, $)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score + Entropy -->
+      <div style="display:grid;gap:1rem;">
+        <!-- Score -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📊 Vulnerability Index</span>
+            <span class="status-badge cyan">NIST SP 800-63B</span>
+          </div>
+          <div class="card-body">
+            <div class="score-wrap">
+              <div class="score-num" id="score-num">0</div>
+              <div class="score-meta">
+                <div class="score-state" id="score-state">AWAITING INPUT</div>
+                <div class="score-note" id="score-note">NIST SP 800-63B Compliant Analysis</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entropy -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">⚛️ Information Entropy Metrics</span>
+          </div>
+          <div class="card-body">
+            <div class="metric-grid">
+              <div class="metric-box">
+                <div class="metric-label">CHARACTER POOL (R)</div>
+                <div class="metric-val" id="entropy-pool">0</div>
+                <div class="metric-unit">Characters</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">ENTROPY BITS (H)</div>
+                <div class="metric-val" id="entropy-bits">0</div>
+                <div class="metric-unit">Bits of Entropy</div>
+              </div>
+            </div>
+            <div class="metric-note">
+              Shannon entropy estimates complexity. Secure criteria recommends <strong style="color:var(--accent-cyan);">80+ bits</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crack Matrix -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">💀 Brute Force Crack Matrix</span>
+        <span class="status-badge red"><span class="dot"></span>THREAT SIM</span>
+      </div>
+      <div class="card-body">
+        <div class="crack-item">
+          <div>
+            <div class="crack-name">Standard CPU (Consumer PC)</div>
+            <div class="crack-sub">Standard PC · ~1 Billion ops/sec</div>
+          </div>
+          <div class="crack-time" id="crack-cpu">Instantly</div>
+        </div>
+        <div class="crack-item">
+          <div>
+            <div class="crack-name">High-End GPU Rig (8x RTX 4090)</div>
+            <div class="crack-sub">GPU Cluster · ~10 Trillion ops/sec</div>
+          </div>
+          <div class="crack-time" id="crack-gpu">Instantly</div>
+        </div>
+        <div class="crack-item">
+          <div>
+            <div class="crack-name">Government Supercomputer / Botnet</div>
+            <div class="crack-sub">Supercomputer · ~100 Quadrillion ops/sec</div>
+          </div>
+          <div class="crack-time" id="crack-super">Instantly</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================= -->
+<!--        PAGE: GENERATOR        -->
+<!-- ============================= -->
+<div class="page" id="page-generator">
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-label">Cryptographic Vault</div>
+      <h1 class="page-title">Secure Password Generator</h1>
+      <p class="page-desc">Generate cryptographically strong credentials conforming to customizable length and complexity parameters.</p>
+    </div>
+
+    <div class="grid-2">
+
+      <!-- Controls -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">⚙️ Generation Constraints</span>
+          <span class="status-badge green"><span class="dot"></span>CRYPTO API</span>
+        </div>
+        <div class="card-body">
+
+          <!-- Mode Toggle -->
+          <div class="section-title">Generation Mode</div>
+          <div class="mode-toggle" style="margin-bottom:1.5rem;">
+            <button class="mode-btn active" data-mode="random">Random Chars</button>
+            <button class="mode-btn" data-mode="words">Memorable Words</button>
+          </div>
+
+          <!-- Length -->
+          <div class="section-title">Password Length</div>
+          <div class="length-wrap">
+            <div class="length-val" id="gen-length-display">16 Characters</div>
+            <div class="length-sub">8 Min &nbsp;&nbsp; 32 Normal &nbsp;&nbsp; 64 Max</div>
+            <div class="slider-wrap">
+              <input type="range" id="gen-slider" min="8" max="64" value="16" />
+              <div class="slider-marks">
+                <span>8</span><span>16</span><span>32</span><span>48</span><span>64</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Character Sets -->
+          <div class="section-title" style="margin-top:1rem;">Included Character Sets</div>
+          <div class="checkbox-grid">
+            <div class="checkbox-item checked gen-checkbox" data-key="upper">
+              <div class="checkbox-box">✓</div>
+              <span class="checkbox-label">Uppercase Letters (A-Z)</span>
+            </div>
+            <div class="checkbox-item checked gen-checkbox" data-key="lower">
+              <div class="checkbox-box">✓</div>
+              <span class="checkbox-label">Lowercase Letters (a-z)</span>
+            </div>
+            <div class="checkbox-item checked gen-checkbox" data-key="numbers">
+              <div class="checkbox-box">✓</div>
+              <span class="checkbox-label">Numeric Digits (0-9)</span>
+            </div>
+            <div class="checkbox-item checked gen-checkbox" data-key="symbols">
+              <div class="checkbox-box">✓</div>
+              <span class="checkbox-label">Special Symbols (&amp;, %, @, #)</span>
+            </div>
+          </div>
+
+          <button class="btn btn-cyan" id="refresh-btn" style="margin-top:1.25rem;width:100%;justify-content:center;">
+            ↻ Refresh Heuristics
+          </button>
+        </div>
+      </div>
+
+      <!-- Output -->
+      <div style="display:grid;gap:1rem;align-content:start;">
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🎯 Generated Cryptographic Target</span>
+            <span class="status-badge green"><span class="dot"></span>HIGH ENTROPY</span>
+          </div>
+          <div class="card-body">
+            <div class="gen-output">
+              <span id="gen-main" style="flex:1;word-break:break-all;font-size:1rem;">Generating...</span>
+              <button class="copy-btn" id="copy-btn">COPY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🔀 Alternative Recommendations</span>
+          </div>
+          <div class="card-body">
+            <div class="alt-passes" id="gen-alts">
+              <!-- Generated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="border-color:rgba(255,204,0,0.2);">
+          <div class="card-body">
+            <div class="section-title" style="color:var(--accent-yellow);">⚡ Entropy Guidance Notice</div>
+            <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-secondary);line-height:1.7;">
+              Offline attacks check up to millions of iterations per second. The easiest way to secure passwords is to simply
+              <strong style="color:var(--accent-cyan);">increase the length</strong>.
+              Every character added increases search complexity exponentially!
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================= -->
+<!--         PAGE: ABOUT           -->
+<!-- ============================= -->
+<div class="page" id="page-about">
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-label">Academic Verification Core</div>
+      <h1 class="page-title">Project Evaluation &amp;<br>Presentation Console</h1>
+      <p class="page-desc">Academic blueprints, design methodologies, and interactive viva training tools to support project evaluations.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+
+      <!-- Slideshow -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📊 Interactive PPT Slideshow</span>
+          <span class="status-badge cyan">Ctrl+P to print</span>
+        </div>
+        <div class="card-body">
+          <div class="slide-box">
+            <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;margin-bottom:0.5rem;">
+              PASSARMOR PROJECT REVIEW
+            </div>
+            <div class="slide-counter" id="slide-counter">SLIDE 1 OF 7</div>
+            <div style="font-family:var(--font-display);font-size:0.7rem;color:var(--text-muted);letter-spacing:3px;margin-bottom:0.25rem;" id="slide-num">01</div>
+            <div class="slide-title" id="slide-title">Executive Summary</div>
+            <div class="slide-content">
+              <ul id="slide-points"></ul>
+            </div>
+          </div>
+          <div class="slide-nav">
+            <button class="btn btn-cyan" id="slide-prev">← Prev</button>
+            <button class="btn btn-cyan" id="slide-next">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specs -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🔧 Engineering Specifications</span>
+        </div>
+        <div class="card-body">
+          <div class="spec-grid">
+            <div class="spec-item">
+              <div class="spec-label">CORE ROUTING</div>
+              <div class="spec-val">Single Page App</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">TYPE COMPLIANCE</div>
+              <div class="spec-val">Vanilla JS</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">STYLING TOKENS</div>
+              <div class="spec-val">Custom CSS</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">LOCAL SECURITY</div>
+              <div class="spec-val">Client-Side JS</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">CRYPTO API</div>
+              <div class="spec-val">Web Crypto API</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">ENTROPY MODEL</div>
+              <div class="spec-val">Shannon H=L·log₂R</div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <div class="section-title">System Integrity Checks</div>
+            <div style="display:grid;gap:0.4rem;">
+              <div class="nist-item pass">
+                <span class="nist-icon">✓</span> All processing runs client-side only
+              </div>
+              <div class="nist-item pass">
+                <span class="nist-icon">✓</span> No credentials transmitted over network
+              </div>
+              <div class="nist-item pass">
+                <span class="nist-icon">✓</span> NIST SP 800-63B compliance engine active
+              </div>
+              <div class="nist-item pass">
+                <span class="nist-icon">✓</span> Shannon entropy calculator verified
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Viva Q&A -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🎓 Viva Prep Assistant</span>
+        <span class="status-badge cyan">Click to expand answers</span>
+      </div>
+      <div class="card-body">
+        <p style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);margin-bottom:1rem;letter-spacing:1px;">
+          Click common oral evaluation questions below to simulate a live examiner question and review textbook answers.
+        </p>
+
+        <!-- Q1 -->
+        <div class="viva-q" data-index="0">
+          <div>
+            <div class="viva-q-label">CRYPTOGRAPHY</div>
+            <div class="viva-q-text">What is Shannon Entropy and how does it apply to passwords?</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.8rem;">▼</span>
+        </div>
+        <div class="viva-ans" id="viva-ans-0">
+          <div class="viva-ans-label">EXPLANATION VECTOR // CRYPTOGRAPHY</div>
+          <p class="viva-ans-text">Shannon Entropy measures the mathematical unpredictability of a password string in bits. The formula is H = L × log₂(R) where L is length and R is character pool size. Each bit added doubles the cryptographic difficulty. High-security criteria standard is 80+ bits of entropy.</p>
+          <div class="viva-tip">
+            <strong>Academic Tip:</strong> During viva, reference that PassArmor mitigates human pattern faults by checking for keyboard walks and sequential chars, conforming to NIST rules rather than old character complexity rules.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="viva-q" data-index="1">
+          <div>
+            <div class="viva-q-label">STANDARDS</div>
+            <div class="viva-q-text">Why does NIST SP 800-63B recommend length over complexity rules?</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.8rem;">▼</span>
+        </div>
+        <div class="viva-ans" id="viva-ans-1">
+          <div class="viva-ans-label">EXPLANATION VECTOR // STANDARDS</div>
+          <p class="viva-ans-text">NIST SP 800-63B (2017 revision) removed mandatory complexity rules after research showed they produced predictable patterns. Length increases entropy more efficiently than complexity because each additional character multiplies search space by the pool size, while users tend to substitute characters predictably (e.g. @ for a, 3 for e).</p>
+          <div class="viva-tip">
+            <strong>Academic Tip:</strong> Cite that NIST now recommends minimum 8 chars (15 for privileged accounts) with no mandatory complexity, but allows user-selected passphrases. PassArmor checks both.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="viva-q" data-index="2">
+          <div>
+            <div class="viva-q-label">THREAT VECTORS</div>
+            <div class="viva-q-text">What is a dictionary attack and how does PassArmor analyze it?</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.8rem;">▼</span>
+        </div>
+        <div class="viva-ans" id="viva-ans-2">
+          <div class="viva-ans-label">EXPLANATION VECTOR // THREAT VECTORS</div>
+          <p class="viva-ans-text">A dictionary attack uses pre-compiled wordlists of common passwords rather than pure brute force. PassArmor's analyzer detects common patterns: sequential characters (abc, 123), keyboard walks (qwerty, asdf), repeated characters, and single dictionary words. These heuristics flag high-risk inputs that would fall to dictionary attacks in milliseconds.</p>
+          <div class="viva-tip">
+            <strong>Academic Tip:</strong> Distinguish from brute force — dictionary attacks prioritize likely candidates. PassArmor's crack matrix models worst-case brute force, so real-world time against common passwords is much lower.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="viva-q" data-index="3">
+          <div>
+            <div class="viva-q-label">IMPLEMENTATION</div>
+            <div class="viva-q-text">How is security and zero credential leak guaranteed in PassArmor?</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.8rem;">▼</span>
+        </div>
+        <div class="viva-ans" id="viva-ans-3">
+          <div class="viva-ans-label">EXPLANATION VECTOR // IMPLEMENTATION</div>
+          <p class="viva-ans-text">PassArmor processes all password analysis entirely within the user's browser using JavaScript. No network requests are made that include user credentials. The password generator uses window.crypto.getRandomValues() — the browser's cryptographically secure pseudorandom number generator. No server logs, no telemetry, no third-party calls.</p>
+          <div class="viva-tip">
+            <strong>Academic Tip:</strong> This is the privacy-by-design principle — security built into the architecture rather than applied afterwards. Can be verified by opening browser DevTools Network tab and observing zero outbound requests during analysis.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="viva-q" data-index="4">
+          <div>
+            <div class="viva-q-label">PASS GEN</div>
+            <div class="viva-q-text">Why should passphrases be preferred over random character blocks?</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.8rem;">▼</span>
+        </div>
+        <div class="viva-ans" id="viva-ans-4">
+          <div class="viva-ans-label">EXPLANATION VECTOR // PASS GEN</div>
+          <p class="viva-ans-text">Passphrases (e.g. "galaxy-phantom-orbit-titan") combine high memorability with strong entropy. A 4-word passphrase from a 7776-word Diceware list has ~51 bits of entropy; a 6-word passphrase achieves ~77 bits. Random character strings have higher bits-per-character but are difficult to memorize, leading users to write them down — creating physical security risks.</p>
+          <div class="viva-tip">
+            <strong>Academic Tip:</strong> Reference XKCD 936 "correct horse battery staple" for viva. The passphrase mode in PassArmor uses a curated wordlist with crypto.getRandomValues for unbiased selection.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
